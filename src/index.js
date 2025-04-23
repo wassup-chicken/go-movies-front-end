@@ -18,7 +18,7 @@ const router = createBrowserRouter([
     element: <App />,
     errorElement: <ErrorPage />,
     children: [
-      {index: true, element: <Home />},
+      { index: true, element: <Home /> },
       {
         path: "/movies",
         element: <Movies />,
@@ -36,7 +36,11 @@ const router = createBrowserRouter([
         element: <EditMovie />
       },
       {
-        path: "/admin",
+        path: "/admin/movie/:id",
+        element: <EditMovie />
+      },
+      {
+        path: "/manage-catalogue",
         element: <ManageCatalogue />
       },
       {
@@ -54,6 +58,6 @@ const router = createBrowserRouter([
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <RouterProvider router={router} />  
+    <RouterProvider router={router} />
   </React.StrictMode>
 );
