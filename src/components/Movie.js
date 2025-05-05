@@ -14,7 +14,7 @@ const Movie = () => {
             headers: headers,
         }
 
-        fetch(`/movies/${id}`, requestOptions)
+        fetch(`${process.env.REACT_APP_BACKEND}/movies/${id}`, requestOptions)
             .then((res) => res.json())
             .then((data) => {
                 console.log("data", data);

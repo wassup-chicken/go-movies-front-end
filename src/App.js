@@ -16,15 +16,15 @@ function App() {
       method: "GET",
       credentials: "include"
     }
-    
-    fetch(`/logout`, requestOptions)
-    .catch(error => {
-      console.log("error logigng out", error);
-    })
-    .finally(() => {
-      setJwtToken("");
-      toggleRefresh(false);
-    })
+
+    fetch(`${process.env.REACT_APP_BACKEND}/logout`, requestOptions)
+      .catch(error => {
+        console.log("error logigng out", error);
+      })
+      .finally(() => {
+        setJwtToken("");
+        toggleRefresh(false);
+      })
     navigate("/login");
   }
 
@@ -38,18 +38,18 @@ function App() {
           method: "GET",
           credentials: "include",
         }
-  
-        fetch(`/refresh`, requestOptions)
-        .then((response) => response.json())
-        .then((data) => {
-          console.log(data);
-          if (data.access_token) {
-            setJwtToken(data.access_token);
-          }
-        })
-        .catch(error => {
-          console.log("user is not logged in", error);
-        });
+
+        fetch(`${process.env.REACT_APP_BACKEND}/refresh`, requestOptions)
+          .then((response) => response.json())
+          .then((data) => {
+            console.log(data);
+            if (data.access_token) {
+              setJwtToken(data.access_token);
+            }
+          })
+          .catch(error => {
+            console.log("user is not logged in", error);
+          });
       }, 600000);
 
       setTickInterval(i);
@@ -69,7 +69,7 @@ function App() {
         credentials: "include",
       }
 
-      fetch(`/refresh`, requestOptions)
+      fetch(`${process.env.REACT_APP_BACKEND}/refresh`, requestOptions)
         .then((response) => response.json())
         .then((data) => {
           if (data.access_token) {
@@ -91,7 +91,7 @@ function App() {
         </div>
         <div className="col text-end">
           {jwtToken === "" ?
-          <Link to="/login"><span className="badge bg-success">Login</span></Link>
+            <Link to="/login"><span className="badge bg-success">Login</span></Link>
             : <a href="#!" onClick={logOut}><span className="badge bg-danger">Logout</span></a>
           }
         </div>
@@ -105,12 +105,12 @@ function App() {
               <Link to="/" className="list-group-item list-group-item-action">Home</Link>
               <Link to="/movies" className="list-group-item list-group-item-action">Movies</Link>
               <Link to="/genres" className="list-group-item list-group-item-action">Genre</Link>
-              {jwtToken !== "" && 
+              {jwtToken !== "" &&
                 <>
                   <Link to="/admin/movie/0" className="list-group-item list-group-item-action">Add Movie</Link>
                   <Link to="/manage-catalogue" className="list-group-item list-group-item-action">Manage Catalogue</Link>
                   <Link to="/graphql" className="list-group-item list-group-item-action">GraphQL</Link>
-                </> 
+                </>
               }
             </div>
           </nav>

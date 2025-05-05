@@ -14,7 +14,7 @@ const Genres = () => {
             headers: headers
         }
 
-        fetch(`/genres`, requestOptions)
+        fetch(`${process.env.REACT_APP_BACKEND}/genres`, requestOptions)
             .then((response) => response.json())
             .then((data) => {
                 if (data.error) {

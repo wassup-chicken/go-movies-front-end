@@ -16,7 +16,7 @@ const Login = () => {
     const handleSubmit = (event) => {
 
         event.preventDefault();
-        
+
         let payload = {
             email: email,
             password: password
@@ -31,7 +31,7 @@ const Login = () => {
             body: JSON.stringify(payload)
         }
 
-        fetch(`/authenticate`, requestOptions)
+        fetch(`${process.env.REACT_APP_BACKEND}/authenticate`, requestOptions)
             .then((response) => response.json())
             .then((data) => {
                 console.log(data);
@@ -53,38 +53,38 @@ const Login = () => {
     }
     return (
         <>
-        <div className="col-md-6 offset-md-3">
-            <h2>Login</h2>
-            <hr />
+            <div className="col-md-6 offset-md-3">
+                <h2>Login</h2>
+                <hr />
 
-            <form onSubmit={handleSubmit}>
-                <Input 
-                    title="Email Address"
-                    type="email"
-                    className="form-control"
-                    name="email"
-                    autoComplete="email-new"
-                    onChange={(event) => setEmail(event.target.value)}
-                />
-                <Input 
-                    title="Password"
-                    type="password"
-                    className="form-control"
-                    name="password"
-                    autoComplete="password-new"
-                    onChange={(event) => setPassword(event.target.value)}
-                />
+                <form onSubmit={handleSubmit}>
+                    <Input
+                        title="Email Address"
+                        type="email"
+                        className="form-control"
+                        name="email"
+                        autoComplete="email-new"
+                        onChange={(event) => setEmail(event.target.value)}
+                    />
+                    <Input
+                        title="Password"
+                        type="password"
+                        className="form-control"
+                        name="password"
+                        autoComplete="password-new"
+                        onChange={(event) => setPassword(event.target.value)}
+                    />
 
-            <hr />
+                    <hr />
 
-            <input 
-                type="submit"
-                className="btn btn-primary"
-                value="Login"
-            />
-            </form>
+                    <input
+                        type="submit"
+                        className="btn btn-primary"
+                        value="Login"
+                    />
+                </form>
 
-        </div>
+            </div>
         </>
     )
 }
